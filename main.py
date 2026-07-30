@@ -66,7 +66,7 @@ if __name__ == "__main__":
     match mode:
         case "1":
             input_file = input("Please copy the complete filepath of a file to transcribe: ")
-            result = tr.transcribe_file(input_file)
+            result = tr.transcribe_file(input_file, )
             print(result)
         case "2":
             result = tr.transcribe_speech()
