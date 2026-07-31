@@ -18,7 +18,6 @@ class AudioTranscriber():
         #write output to .txt file
         with open(f_output, "w") as f:
             f.write(text)
-
         return text
 
     #f: transcribe audio captured by microphone
@@ -43,7 +42,7 @@ if __name__ == "__main__":
     mode = input("Press 1 to transcribe an audio file, 2 to record and transcribe audio: ")
     match mode:
         case "1":
-            input_file = input("Please copy the complete filepath of a .WAV file to transcribe: ")
+            input_file = input("Copy the complete filepath of a .WAV audio file to transcribe: ")
             result = tr.transcribe_file(input_file)
             print(result)
         case "2":
