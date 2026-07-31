@@ -1,5 +1,4 @@
 import speech_recognition as sr
-from datetime import timedelta
 
 class AudioTranscriber():
 
@@ -7,17 +6,6 @@ class AudioTranscriber():
     def __init__(self, interval_seconds=10):
         #recognizer instance
         self.recognizer = sr.Recognizer()
-        self.interval_seconds = interval_seconds
-
-    #f: generate timestamps of given interval from audio
-    ## returns a list representing time intervals elapsed in duration
-    def generate_timestamps(self, duration):
-        timestamps= []
-        current_ts = 0
-        while current_ts <= duration:
-            timestamps.append(timedelta(seconds=current_ts))
-            current_ts += self.interval_seconds
-        return timestamps
 
     #f: transcribe audio file to text using Google Web Speech, then output to text file
     def transcribe_file(self, filepath, f_output="transcript.txt"):
@@ -26,14 +14,6 @@ class AudioTranscriber():
 
         #send audio to Google speech API for text transcription
         text = self.recognizer.recognize_google(audio_data)
-
-        """"
-        #build timestamped transcript
-        timestamps = self.generate_timestamps(duration)
-        lines = []
-        for ts in timestamps:
-            lines.append(f"[{ts}] {text}")
-        """
 
         #write output to .txt file
         with open(f_output, "w") as f:
@@ -49,15 +29,13 @@ class AudioTranscriber():
             self.recognizer.adjust_for_ambient_noise(source, duration=2)
             print("Listening...")
             audio_data = self.recognizer.listen(source, timeout=5)
+            
         #send audio data to Google speech API
         text = self.recognizer.recognize_google(audio_data)
-
-        #build timestamped transcript; no estd duration, so assume 10-second blocks
 
         #write output to .txt file
         with open(f_output, "w") as f:
                     f.write(text)
-
         return text
 
 if __name__ == "__main__":
@@ -65,8 +43,8 @@ if __name__ == "__main__":
     mode = input("Press 1 to transcribe an audio file, 2 to record and transcribe audio: ")
     match mode:
         case "1":
-            input_file = input("Please copy the complete filepath of a file to transcribe: ")
-            result = tr.transcribe_file(input_file, )
+            input_file = input("Please copy the complete filepath of a .WAV file to transcribe: ")
+            result = tr.transcribe_file(input_file)
             print(result)
         case "2":
             result = tr.transcribe_speech()
