@@ -1,2 +1,2 @@
 # uccs-dev
-random programs relating to my UCCS assignments
+programs relating to my UCCS assignments
