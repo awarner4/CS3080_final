@@ -1,2 +1,2 @@
-# uccs-dev
-programs relating to my UCCS assignments
+# cs3080 final project
+files for my Python final project
