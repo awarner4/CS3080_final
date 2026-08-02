@@ -1,7 +1,10 @@
 # cs3080 final project
 Program to transcribe either a pre-recorded audio file or live from a microphone.
+
 Package requirements:
 SpeechRecognition, Deep Multilingual Punctuation
+
+Functions:
 1. File Transcription
    - Requires .WAV file
    - Returns plain text file named transcript.txt
