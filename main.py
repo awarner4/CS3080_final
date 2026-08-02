@@ -56,7 +56,7 @@ class AudioTranscriber():
 if __name__ == "__main__":
 
     tr = AudioTranscriber()
-    mode = input("Enter 1 to transcribe a file, 2 to record and transcribe from the microphone: ")
+    mode = input("Enter 1 to transcribe a .WAV file, 2 to record and transcribe from the microphone: ")
 
     match mode:
         case "1":
