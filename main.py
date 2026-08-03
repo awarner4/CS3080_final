@@ -3,9 +3,8 @@ from deepmultilingualpunctuation import PunctuationModel
 
 class AudioTranscriber():
 
-    #initialize Recognizer and interval seconds
+    #initialize Recognizer punctmodel
     def __init__(self):
-        #recognizer instance
         self.recognizer = sr.Recognizer()
         self.punct_model = PunctuationModel()
 
@@ -41,7 +40,7 @@ class AudioTranscriber():
             self.recognizer.non_speaking_duration = 0.5
 
             #capture microphone input; stop after a short, bounded recording window
-            print("Listening... Speak now.")
+            print("Listening...")
             audio_data = self.recognizer.listen(source, timeout=5, phrase_time_limit=5)
 
             #send audio data to Google speech API, then restore punctuation
