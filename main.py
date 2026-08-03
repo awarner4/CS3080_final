@@ -37,20 +37,20 @@ class AudioTranscriber():
         with sr.Microphone() as source:
             #Reduce ambient noise and establish pause threshold, non-speaking duration
             self.recognizer.adjust_for_ambient_noise(source, duration=1)
-            self.recognizer.pause_threshold = 3
-            self.recognizer.non_speaking_duration = 1
+            self.recognizer.pause_threshold = 2
+            self.recognizer.non_speaking_duration = 0.5
 
-            #capture microphone input; time out after 5 seconds
-            print("Listening...")
-            audio_data = self.recognizer.listen(source, timeout=5)
-            
-        #send audio data to Google speech API, then restore punctuation
-        text = self.recognizer.recognize_google(audio_data)
-        text = self.restore_punctuation(text)
+            #capture microphone input; stop after a short, bounded recording window
+            print("Listening... Speak now.")
+            audio_data = self.recognizer.listen(source, timeout=5, phrase_time_limit=5)
+
+            #send audio data to Google speech API, then restore punctuation
+            text = self.recognizer.recognize_google(audio_data)
+            text = self.restore_punctuation(text)
 
         #write output to .txt file
         with open(f_output, "w") as f:
-                    f.write(text)
+            f.write(text)
         return text
 
 if __name__ == "__main__":
